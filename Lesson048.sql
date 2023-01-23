@@ -37,6 +37,11 @@ group by c.name;
 select count(pt.tag_id) / (select count(p.id) from post p)
 from post_tag pt;
 
+select avg(c) 'average tags by post' from (select count(t.name) c from post p
+join post_tag pt on p.id = pt.post_id
+join tag t on pt.tag_id = t.id
+group by p.id) as t;
+
 -- 5. Найти блог з наибольшим количеством постов
 select b.name, count(p.title)
 from blog b
